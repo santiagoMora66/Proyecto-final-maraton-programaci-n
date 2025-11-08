@@ -54,4 +54,9 @@ class Entradas:
             email = input("Ingrese el email del participante: ")    
         return nombre, int(edad), email
 
-        
+    def pedir_correo_participante(participantes: Participantes):
+        email = input("Ingrese el email del participante: ")
+        while not Validar.validar_email_exista(email, participantes):
+            print("Email inválido. Intente nuevamente.")
+            email = input("Ingrese el email del participante: ")
+        return email

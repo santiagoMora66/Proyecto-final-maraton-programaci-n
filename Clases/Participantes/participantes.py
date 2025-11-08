@@ -12,4 +12,22 @@ class Participantes:
         self.lista_participantes.append(participante)
 
     def listar_participantes(self):
-        return self.lista_participantes
+        if not self.lista_participantes:
+            print("No hay participantes registrados.")
+            return
+        for p in self.lista_participantes:
+            print(f"Nombre: {p.nombre}, Edad: {p.edad}, Email: {p.email}")
+
+    def eliminar_participante(self, correo_participante: int):
+        if 0 <= correo_participante < len(self.lista_participantes):
+            Participante = self.obtener_participante(correo_participante)
+            del self.lista_participantes[Participante]
+        else:
+            return False
+        
+    def obtener_participante(self, correo_electronico: str):
+        for p in self.lista_participantes:
+            if p.correo == correo_electronico:
+                return p
+        print("Participante no encontrado.")
+        return None

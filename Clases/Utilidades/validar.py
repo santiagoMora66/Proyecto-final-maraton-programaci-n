@@ -48,10 +48,14 @@ class Validar:
         return True
     
     @staticmethod
-    def validar_email(email: str , participantes: Participantes):      
-        if "@" not in email or "." not in email:
+    def validar_email(correo: str, Participantes: Participantes):      # cambiar esto
+        if "@" not in correo and correo not in Participantes.lista_participantes:
             return False
-        for p in participantes.lista_participantes:
-            if p.email == email:
-                return False
         return True
+        
+    
+    @staticmethod
+    def validar_participante_exista(email: str, participantes: Participantes):
+        """Valida que el participante exista en la lista de participantes"""
+        return participantes.obtener_participante(email) is not None
+    

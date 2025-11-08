@@ -185,9 +185,16 @@ def mostrar_gestion_participantes(participantes : Participantes):
             case '2':
                 pass # Lógica para editar participante
             case '3':
+                limpiar_pantalla()
+                correo_participante = Entradas.pedir_correo_participante(participantes)
+                participantes.eliminar_participante(correo_participante)
+                print("participante eliminado correctamente")
+                
                 pass # Lógica para eliminar participante
             case '4':
-                pass # Lógica para ver lista de participantes
+                limpiar_pantalla()
+                participantes.listar_participantes()
+                pausar_pantalla()
             case '5':
                 limpiar_pantalla()
                 pass # Lógica para asignar participante a equipo
