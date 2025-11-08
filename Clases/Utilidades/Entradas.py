@@ -1,4 +1,10 @@
 try:
+    from ..Participantes.participantes import Participantes
+except ModuleNotFoundError:
+    from Clases.Participantes.participantes import Participantes
+
+
+try:
     from validar import Validar
 except ModuleNotFoundError:
     from Clases.Utilidades.validar import Validar
@@ -32,3 +38,20 @@ class Entradas:
             print("ID inválido. Intente nuevamente.")
             id_input = input("Ingrese el ID del problema: ")
         return int(id_input)
+
+    def pedir_datos_participante(participantes: Participantes):
+        nombre = input("Ingrese el nombre del participante: ")
+        while not Validar.validar_nombre(nombre):
+            print("Nombre inválido. Intente nuevamente.")
+            nombre = input("Ingrese el nombre del participante: ")
+        edad = input("Ingrese la edad del participante: ")
+        while not Validar.validar_edad(edad):
+            print("Edad inválida. Intente nuevamente.")
+            edad = input("Ingrese la edad del participante: ")
+        email = input("Ingrese el email del participante: ")
+        while not Validar.validar_email(email, participantes):
+            print("Email inválido. Intente nuevamente.")
+            email = input("Ingrese el email del participante: ")    
+        return nombre, int(edad), email
+
+        

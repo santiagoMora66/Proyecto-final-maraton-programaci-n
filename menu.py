@@ -3,7 +3,7 @@ from Clases.Problemas.Banco_problemas import Banco_problemas
 from Clases.Problemas.Problema import Problema, Facil, Medio, Dificil
 from Clases.Utilidades.Entradas import Entradas
 from Clases.Utilidades.validar import Validar
-from Clases.Participante.participantes import Participantes
+from Clases.Participantes.participantes import Participantes
 
 def limpiar_pantalla():
     """Limpia la pantalla"""
@@ -177,7 +177,11 @@ def mostrar_gestion_participantes(participantes : Participantes):
 
         match opcion:
             case '1':
-                pass # Lógica para agregar participante
+                limpiar_pantalla()
+                nombre, edad, email = Entradas.pedir_datos_participante(participantes)
+                participantes.agregar_participante(nombre, edad, email)
+                print("Participante agregado exitosamente.")
+                pausar_pantalla()
             case '2':
                 pass # Lógica para editar participante
             case '3':

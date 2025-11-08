@@ -1,5 +1,5 @@
 try:
-    from Clases.Participante.participante import Participante
+    from Clases.Participantes.participante import Participante
 except ModuleNotFoundError:
     from participante import Participante
     
