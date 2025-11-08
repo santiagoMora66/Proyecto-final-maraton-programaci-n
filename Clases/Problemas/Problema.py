@@ -1,0 +1,33 @@
+from ..Utilidades.Guardar import Guardar
+from ..Utilidades.cargar import Cargar
+
+class Problema():
+    """Clase base para representar un problema de programación."""
+    id_problema_counter = Cargar.cargar_id_problema_counter('id_problema_counter.pkl')
+
+    def __init__(self, titulo, descripcion):
+        self.id_problema = Problema.id_problema_counter
+        Problema.id_problema_counter += 1
+        Guardar.guardar_id_problema_counter(Problema.id_problema_counter, 'id_problema_counter.pkl')
+        self.titulo = titulo
+        self.descripcion = descripcion
+
+
+class Facil(Problema):
+    """Clase para representar un problema fácil."""
+    def __init__(self, titulo, descripcion):
+        super().__init__(titulo, descripcion)
+        self.puntos = 2
+
+class Medio(Problema):
+    """Clase para representar un problema de dificultad media."""
+    def __init__(self, titulo, descripcion):
+        super().__init__(titulo, descripcion)
+        self.puntos = 5
+
+class Dificil(Problema):
+    """Clase para representar un problema difícil."""
+    def __init__(self, titulo, descripcion):
+        super().__init__(titulo, descripcion)
+        self.puntos = 10
+
