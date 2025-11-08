@@ -3,6 +3,7 @@ from Clases.Problemas.Banco_problemas import Banco_problemas
 from Clases.Problemas.Problema import Problema, Facil, Medio, Dificil
 from Clases.Utilidades.Entradas import Entradas
 from Clases.Utilidades.validar import Validar
+from Clases.Participante.participantes import Participantes
 
 def limpiar_pantalla():
     """Limpia la pantalla"""
@@ -38,7 +39,7 @@ def mostrar_menu_principal():
             case '3':
                 pass #gestion_grupos()
             case '4':
-                pass #gestion_participantes()
+                mostrar_gestion_participantes(participantes)
             case '5':
                 pass #resultados_maratones()
             case '6':
@@ -157,8 +158,51 @@ def mostrar_gestion_problemas(banco_problemas : Banco_problemas):
                 pausar_pantalla()
                 limpiar_pantalla()
 
+def mostrar_gestion_participantes(participantes : Participantes):
+    """Muestra el menú de gestión de participantes."""
+    while True:
+        limpiar_pantalla()
+        print("_"*100 + "\n")
+        print(" GESTIÓN DE PARTICIPANTES")
+        print("_"*100)
+        print("1. Agregar participante")
+        print("2. Editar participante")
+        print("3. Eliminar participante")
+        print("4. Ver lista de participantes")
+        print("5. Asignar participante a equipo")
+        print("6. Volver al menú principal")
+        print("_"*100)
+
+        opcion = input("Seleccione una opción (1-6): ").strip()
+
+        match opcion:
+            case '1':
+                pass # Lógica para agregar participante
+            case '2':
+                pass # Lógica para editar participante
+            case '3':
+                pass # Lógica para eliminar participante
+            case '4':
+                pass # Lógica para ver lista de participantes
+            case '5':
+                limpiar_pantalla()
+                pass # Lógica para asignar participante a equipo
+            case '6':
+                limpiar_pantalla()
+                break
+            case '7':
+                limpiar_pantalla()
+                print("¡Hasta pronto!")
+                pausar_pantalla()
+                break
+            case _:
+                limpiar_pantalla()
+                print("Opcion invalida. Por favor, seleccione 1-7.")
+                pausar_pantalla()
+                limpiar_pantalla()
 
 
 if __name__ == "__main__":
     banco_problemas = Banco_problemas()
+    participantes = Participantes()
     mostrar_menu_principal()

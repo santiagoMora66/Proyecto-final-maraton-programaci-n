@@ -13,3 +13,11 @@ class Guardar:
         """Guarda el contador de IDs de problemas en un archivo."""
         with open(archivo, 'wb') as f:
             pickle.dump(counter, f)
+    
+    @staticmethod
+    def guardar_id_equipo_counter(counter, archivo):
+        """Guarda el contador de IDs de equipos en un archivo."""
+        with open(archivo, 'wb') as f:
+            pickle.dump(counter, f)
+    
+    

@@ -18,3 +18,12 @@ class Cargar:
                 return pickle.load(f)
         except FileNotFoundError:
             return 1  # Valor por defecto si no se encuentra el archivo
+
+    @staticmethod
+    def cargar_id_equipo_counter(archivo):
+        """Carga el contador de IDs de equipos desde un archivo."""
+        try:
+            with open(archivo, 'rb') as f:
+                return pickle.load(f)
+        except FileNotFoundError:
+            return 1  # Valor por defecto si no se encuentra el archivo
