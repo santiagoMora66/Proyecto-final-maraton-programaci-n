@@ -54,53 +54,6 @@ def mostrar_menu_principal():
                 pausar_pantalla()
                 limpiar_pantalla()
 
-def mostrar_gestion_maratones():
-    """Muestra el menú de gestión de maratones y maneja la selección de opciones."""
-    while True:
-        limpiar_pantalla()
-        print("_"*100 + "\n")
-        print(" GESTIÓN DE MARATONES")
-        print("_"*100)
-        print("1. Crear nueva maratón")
-        print("2. Listar maratones existentes")
-        print("3. Gestionar maratón específico")
-        print("4. Estadísticas y Resultados")
-        print("5. Volver al menú principal")
-        print("_"*100)
-
-        opcion = input("Seleccione una opción (1-5): ").strip()
-
-        match opcion:
-            case '1':
-                limpiar_pantalla()
-                sistema.maratones.crear_maraton()
-                pausar_pantalla()
-            case '2':
-                limpiar_pantalla()
-                sistema.maratones.listar_maratones()
-                pausar_pantalla()
-            case '3':
-                limpiar_pantalla()
-                try:
-                    id_maraton = input("Ingrese el ID de la maratón: ").strip()
-                    maraton = sistema.maratones.obtener_maraton(id_maraton)
-                    mostrar_gestionar_maraton_especifico(maraton)
-                    pausar_pantalla()
-                except ValueError as e:
-                    print(f"Error: {e}")
-            case '4':
-                pass
-                print("en mantenimiento")
-                #sistema.maratones.estadisticas_y_resultados()
-            case '5':
-                limpiar_pantalla()
-                break
-            case _:
-                limpiar_pantalla()
-                print("Opcion invalida. Por favor, seleccione 1-5.")
-                pausar_pantalla()
-                limpiar_pantalla()
-
 def mostrar_gestion_problemas(banco_problemas : Banco_problemas):
     """Muestra el menú de gestión de problemas."""
     while True:
@@ -183,14 +136,25 @@ def mostrar_gestion_participantes(participantes : Participantes):
                 print("Participante agregado exitosamente.")
                 pausar_pantalla()
             case '2':
+                limpiar_pantalla()
+                correo_participante = Entradas.pedir_correo_participante(participantes)
+                if correo_participante:
+                    nombre, edad, email = Entradas.pedir_datos_participante(participantes)
+                    participantes.eliminar_participante(correo_participante)
+                    print("participante eliminado correctamente")
+                else:
+                    print("no se encontro al participante")
+                pausar_pantalla()          
                 pass # Lógica para editar participante
             case '3':
                 limpiar_pantalla()
-                correo_participante = Entradas.pedir_correo_participante(participantes)
-                participantes.eliminar_participante(correo_participante)
-                print("participante eliminado correctamente")
-                
-                pass # Lógica para eliminar participante
+                id = Entradas.pedir_id_participante(participantes)
+                if id:
+                    participantes.eliminar_participante(id)
+                    print("participante eliminado correctamente")
+                else:
+                    print("no se encontro al participante")
+                pausar_pantalla()
             case '4':
                 limpiar_pantalla()
                 participantes.listar_participantes()

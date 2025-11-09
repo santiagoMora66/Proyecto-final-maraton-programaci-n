@@ -3,12 +3,12 @@ from ..Utilidades.cargar import Cargar
 
 class Problema():
     """Clase base para representar un problema de programación."""
-    id_problema_counter = Cargar.cargar_id_problema_counter('id_problema_counter.pkl')
+    id_problema_counter = Cargar.cargar_id_problema_counter()
 
     def __init__(self, titulo, descripcion):
         self.id_problema = Problema.id_problema_counter
         Problema.id_problema_counter += 1
-        Guardar.guardar_id_problema_counter(Problema.id_problema_counter, 'id_problema_counter.pkl')
+        Guardar.guardar_id_problema_counter(Problema.id_problema_counter)
         self.titulo = titulo
         self.descripcion = descripcion
 

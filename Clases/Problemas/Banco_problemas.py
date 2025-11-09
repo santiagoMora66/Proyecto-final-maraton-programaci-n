@@ -1,20 +1,17 @@
-try:
+try: #arreglar este 
     from ..Utilidades.Guardar import Guardar
     from ..Utilidades.cargar import Cargar
-except ImportError:
+    from .Problema import Problema, Facil, Medio, Dificil 
+except ImportError:    
     from Clases.Utilidades.Guardar import Guardar
     from Clases.Utilidades.cargar import Cargar
-
-    
-try:
-    from .Problema import Problema, Facil, Medio, Dificil 
-except ImportError:
-    from Problema import Problema, Facil, Medio, Dificil 
+    from Clases.Problemas.Problema import Problema, Facil, Medio, Dificil
 
 
 class Banco_problemas():
+    """clase que representa el Banco de problemas totales"""
     def __init__(self):
-        self.problemas = Cargar.cargar_banco_problemas('banco_problemas.pkl')
+        self.problemas = Cargar.cargar_banco_problemas()    
     
     def agregar_problema(self, titulo: str, descripcion: str, dificultad: str):
         """Agrega problema creándolo según dificultad"""
@@ -24,18 +21,16 @@ class Banco_problemas():
             problema = Medio(titulo, descripcion)
         elif dificultad == "dificil":
             problema = Dificil(titulo, descripcion)
-        else:
-            raise ValueError("Dificultad no válida")
             
         self.problemas.append(problema)
-        Guardar.guardar_banco_problemas(self.problemas, 'banco_problemas.pkl')
+        Guardar.guardar_banco_problemas(self.problemas)
 
     def eliminar_problema(self, id_problema: int):
         """Elimina un problema del banco de problemas"""
         problema = self.obtener_problema_por_id(id_problema)
         if problema:
             self.problemas.remove(problema)
-            Guardar.guardar_banco_problemas(self.problemas, 'banco_problemas.pkl')
+            Guardar.guardar_banco_problemas(self.problemas)
         else:
             raise ValueError("Índice de problema inválido.")
 
@@ -47,7 +42,7 @@ class Banco_problemas():
             problema.titulo = nuevo_titulo
             problema.descripcion = nueva_descripcion
             problema.dificultad = nueva_dificultad
-            Guardar.guardar_banco_problemas(self.problemas, 'banco_problemas.pkl')
+            Guardar.guardar_banco_problemas(self.problemas)
         else:
             raise ValueError("Índice de problema inválido.")
         

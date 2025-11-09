@@ -41,6 +41,7 @@ class Validar:
         if type(nombre) != str:
             return False
         return True
+    
     @staticmethod
     def validar_edad(edad: str):
         if not edad.isdigit() or int(edad) <= 0:
@@ -48,14 +49,26 @@ class Validar:
         return True
     
     @staticmethod
-    def validar_email(correo: str, Participantes: Participantes):      # cambiar esto
-        if "@" not in correo and correo not in Participantes.lista_participantes:
-            return False
-        return True
-        
+    def email_ya_existe(correo: str, participantes: Participantes):
+        for participante in participantes.lista_participantes:
+            if participante.email == correo:
+                return True
+        return False
     
+    @staticmethod
+    def id_existe(id: int, participantes : Participantes):
+        for participante in participantes.lista_participantes:
+            if participante.id == id:
+                return True
+        return False
+            
+
+    @staticmethod
+    def validar_email(correo: str, participantes: Participantes):
+        return "@" in correo and not Validar.email_ya_existe(correo, participantes)
+     
     @staticmethod
     def validar_participante_exista(email: str, participantes: Participantes):
         """Valida que el participante exista en la lista de participantes"""
         return participantes.obtener_participante(email) is not None
-    
+

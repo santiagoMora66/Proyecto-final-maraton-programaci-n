@@ -1,19 +1,17 @@
-try:
-    import Clases.Equipos.Equipos as Equipos
+try:#este try except es para correr el en local o desde el menu
+    import Clases.Equipos.Equipo as Equipo
     from Clases.Utilidades.Guardar import Guardar
     from Clases.Utilidades.cargar import Cargar
 except ImportError:
-    from Equipos import Equipos
+    from Equipo import Equipo
     from ..Utilidades.Guardar import Guardar
     from ..Utilidades.cargar import Cargar
 
 class Equipos:
-    """Clase para representar un equipo de trabajo."""
+    """Clase para representar todos los equipos"""
     def __init__(self, nombre: str):
-        self.nombre_equipo = nombre
-        self.participantes = []
-        self.id_equipo = Cargar.cargar_id_equipo_counter('id_equipo_counter.pkl')
-        Guardar.guardar_id_equipo_counter(self.id_equipo, 'id_equipo_counter.pkl')
+        self.equipos = [] #añadir logica para guardar en una base de datos
 
-    def agregar_participante(self, participante):
+    def agregar_equipo(self, participante):
+        """agrega un equipo a la lista"""
         self.participantes.append(participante)
