@@ -21,7 +21,7 @@ class Participantes:
         """metodo que muestra todos los participantes de la lista"""
         if not self.lista_participantes:
             print("No hay participantes registrados.")
-            return
+            return None
         for p in self.lista_participantes:
             print(f"ID:{p.id} Nombre: {p.nombre}, Edad: {p.edad}, Email: {p.email}")
 
@@ -29,11 +29,11 @@ class Participantes:
         """metodo para modificar los datos de un participantes"""
         Participante = self.obtener_participante(id)
         if Participante:
-            if nombre != None:
+            if nombre is not None:
                 Participante.nombre = nombre
-            if edad != None:
+            if edad is not None:
                 Participante.edad = edad
-            if email != None and email != Participante.email:
+            if email is not None:
                 Participante.email = email
 
     def eliminar_participante(self, id: int):

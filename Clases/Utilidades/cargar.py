@@ -50,3 +50,4 @@ class Cargar:
                 return pickle.load(f)
         except FileNotFoundError:
             return 1  # Valor por defecto si no se encuentra el archivo
+

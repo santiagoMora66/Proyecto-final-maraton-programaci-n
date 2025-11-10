@@ -1,6 +1,6 @@
 import os
 from Clases.Problemas.Banco_problemas import Banco_problemas
-from Clases.Problemas.Problema import Problema, Facil, Medio, Dificil
+from Clases.Problemas.Problema import Problema, Facil, Medio, Dificil 
 from Clases.Utilidades.Entradas import Entradas
 from Clases.Utilidades.validar import Validar
 from Clases.Participantes.participantes import Participantes
@@ -139,12 +139,14 @@ def mostrar_gestion_participantes(participantes : Participantes):
                 id = Entradas.pedir_id_participante(participantes)
                 if id:
                     nombre, edad, email = Entradas.pedir_cambio_datos_participante(participantes)
-                    participantes.editar_participante(id, nombre, edad, email )
-                    print("participante editado correctamente")
+                    if nombre is None and edad is None and email is None:
+                        print("no se ha editado nada")
+                    else:
+                        participantes.editar_participante(id, nombre, edad, email )
+                        print("participante editado correctamente")
                 else:
                     print("no se encontro al participante")
                 pausar_pantalla()          
-                pass # Lógica para editar participante
             case '3':
                 limpiar_pantalla()
                 id = Entradas.pedir_id_participante(participantes)

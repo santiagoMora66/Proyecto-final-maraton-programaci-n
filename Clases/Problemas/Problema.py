@@ -61,3 +61,5 @@ class Dificil(Problema):
     @abstractmethod
     def obtener_puntos(self):
         return 10
+
+

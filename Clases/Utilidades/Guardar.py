@@ -5,7 +5,7 @@ class Guardar:
     @staticmethod
     def guardar_banco_problemas(banco_problemas):
         """Guarda todos los problemas del banco en un archivo de texto."""
-        ruta = "datos/id_problema_counter.pkl"
+        ruta = "datos/banco_problemas.pkl"
         with open(ruta, 'wb') as f:
             pickle.dump(banco_problemas, f)
 
