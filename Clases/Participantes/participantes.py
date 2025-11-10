@@ -25,13 +25,16 @@ class Participantes:
         for p in self.lista_participantes:
             print(f"ID:{p.id} Nombre: {p.nombre}, Edad: {p.edad}, Email: {p.email}")
 
-    def editar_participante(self, correo_participante: str):
+    def editar_participante(self, id:str, nombre: str, edad: str, email:str):
         """metodo para modificar los datos de un participantes"""
-        Participante = self.obtener_participante(correo_participante)
-        if Participante:   
-            Participante.nombre = None
-            Participante.edad = None
-            Participante.email = None
+        Participante = self.obtener_participante(id)
+        if Participante:
+            if nombre != None:
+                Participante.nombre = nombre
+            if edad != None:
+                Participante.edad = edad
+            if email != None and email != Participante.email:
+                Participante.email = email
 
     def eliminar_participante(self, id: int):
         """metodo para eliminar todos los participantes"""

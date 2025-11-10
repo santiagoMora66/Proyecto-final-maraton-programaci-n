@@ -10,12 +10,12 @@ class Guardar:
             pickle.dump(banco_problemas, f)
 
     @staticmethod
-    def guardar_id_problema_counter(counter):
+    def guardar_id_problema_contador(contador):
         """Guarda el contador de IDs de problemas en un archivo."""
         ruta = "datos/id_problema_counter.pkl"
         with open(ruta, 'wb') as f:
-            pickle.dump(counter, f)
-
+            pickle.dump(contador, f)
+    
     @staticmethod
     def guardar_id_participante_contador(counter):
         """Guarda el contador de IDs de cada participante"""

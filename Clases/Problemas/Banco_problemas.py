@@ -2,7 +2,7 @@ try: #arreglar este
     from ..Utilidades.Guardar import Guardar
     from ..Utilidades.cargar import Cargar
     from .Problema import Problema, Facil, Medio, Dificil 
-except ImportError:    
+except ImportError:
     from Clases.Utilidades.Guardar import Guardar
     from Clases.Utilidades.cargar import Cargar
     from Clases.Problemas.Problema import Problema, Facil, Medio, Dificil
@@ -34,8 +34,7 @@ class Banco_problemas():
         else:
             raise ValueError("Índice de problema inválido.")
 
-    def modificar_problema(self, id_problema, nuevo_titulo, nueva_descripcion, nueva_dificultad):
-        
+    def modificar_problema(self, id_problema : int, nuevo_titulo: str, nueva_descripcion: str, nueva_dificultad: str):  
         """Modifica un problema en el banco de problemas"""
         problema = self.obtener_problema_por_id(id_problema)
         if problema:
@@ -57,7 +56,7 @@ class Banco_problemas():
         """Lista todos los problemas en el banco de problemas"""
         if not self.problemas:
             print("No hay problemas en el banco de problemas.")
-            return
+            return None
         
         for problema in self.problemas:
             if isinstance(problema, Facil):

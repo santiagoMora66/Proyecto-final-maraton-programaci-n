@@ -12,7 +12,7 @@ class Cargar:
             return []
 
     @staticmethod
-    def cargar_id_problema_counter():
+    def cargar_id_problema_contador():
         """Carga el contador de IDs de problemas desde un archivo."""
         ruta = "datos/id_problema_counter.pkl"
         try:

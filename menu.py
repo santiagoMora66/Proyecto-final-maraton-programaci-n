@@ -122,11 +122,10 @@ def mostrar_gestion_participantes(participantes : Participantes):
         print("2. Editar participante")
         print("3. Eliminar participante")
         print("4. Ver lista de participantes")
-        print("5. Asignar participante a equipo")
-        print("6. Volver al menú principal")
+        print("5. Volver al menú principal")
         print("_"*100)
 
-        opcion = input("Seleccione una opción (1-6): ").strip()
+        opcion = input("Seleccione una opción (1-5): ").strip()
 
         match opcion:
             case '1':
@@ -137,11 +136,11 @@ def mostrar_gestion_participantes(participantes : Participantes):
                 pausar_pantalla()
             case '2':
                 limpiar_pantalla()
-                correo_participante = Entradas.pedir_correo_participante(participantes)
-                if correo_participante:
-                    nombre, edad, email = Entradas.pedir_datos_participante(participantes)
-                    participantes.eliminar_participante(correo_participante)
-                    print("participante eliminado correctamente")
+                id = Entradas.pedir_id_participante(participantes)
+                if id:
+                    nombre, edad, email = Entradas.pedir_cambio_datos_participante(participantes)
+                    participantes.editar_participante(id, nombre, edad, email )
+                    print("participante editado correctamente")
                 else:
                     print("no se encontro al participante")
                 pausar_pantalla()          
@@ -161,18 +160,10 @@ def mostrar_gestion_participantes(participantes : Participantes):
                 pausar_pantalla()
             case '5':
                 limpiar_pantalla()
-                pass # Lógica para asignar participante a equipo
-            case '6':
-                limpiar_pantalla()
-                break
-            case '7':
-                limpiar_pantalla()
-                print("¡Hasta pronto!")
-                pausar_pantalla()
                 break
             case _:
                 limpiar_pantalla()
-                print("Opcion invalida. Por favor, seleccione 1-7.")
+                print("Opcion invalida. Por favor, seleccione 1-5.")
                 pausar_pantalla()
                 limpiar_pantalla()
 

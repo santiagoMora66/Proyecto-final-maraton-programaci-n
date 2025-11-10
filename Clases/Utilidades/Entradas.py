@@ -41,21 +41,54 @@ class Entradas:
 
     def pedir_datos_participante(participantes: Participantes):
         nombre = input("Ingrese el nombre del participante: ")
-        
+
         while not Validar.validar_nombre(nombre):
-            print("Nombre inválido. Intente nuevamente.")
-            nombre = input("Ingrese el nombre del participante: ")
+                print("Nombre inválido. Intente nuevamente.")
+                nombre = input("Ingrese el nombre del participante: ")
         
         edad = input("Ingrese la edad del participante: ")
+        
         while not Validar.validar_edad(edad):
             print("Edad inválida. Intente nuevamente.")
             edad = input("Ingrese la edad del participante: ")
-        
+
         email = input("Ingrese el email del participante: ")
+       
         while not Validar.validar_email(email, participantes):
             print("Email inválido. Intente nuevamente.")
             email = input("Ingrese el email del participante: ")    
+            
+        return nombre, int(edad), email
+
+    def pedir_cambio_datos_participante(participantes: Participantes):
+        print("presiona enter si quieres mantener los datos originales")
+        nombre = input("Ingrese el nombre del participante: ")
+
+        if nombre != "":
+            while not Validar.validar_nombre(nombre):
+                print("Nombre inválido. Intente nuevamente.")
+                nombre = input("Ingrese el nombre del participante: ")
+        else:
+            nombre = None
         
+        edad = input("Ingrese la edad del participante: ")
+        
+        if edad != "":
+            while not Validar.validar_edad(edad):
+                print("Edad inválida. Intente nuevamente.")
+                edad = input("Ingrese la edad del participante: ")
+        else:
+            edad = None
+            
+        email = input("Ingrese el email del participante: ")
+       
+        if email != "":
+            while not Validar.validar_email(email, participantes):
+                print("Email inválido. Intente nuevamente.")
+                email = input("Ingrese el email del participante: ")    
+        else:
+            email = None
+            
         return nombre, int(edad), email
 
     def pedir_correo_participante(participantes: Participantes):
@@ -66,7 +99,7 @@ class Entradas:
             return False
     
     def pedir_id_participante(participantes : Participantes):
-        id = int(input("Ingresa el Id del participante: "))
+        id = int(input("Ingresa el Id del participante: "))            
         if Validar.id_existe(id, participantes):
             return int(id)
         else:
