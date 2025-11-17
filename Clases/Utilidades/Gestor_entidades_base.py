@@ -26,7 +26,6 @@ class Gestor_entidades_base(ABC):
         for entidad in lista:
             if self._obtener_id_entidad(entidad) == id_entidad:
                 return entidad
-        print(f"Entidad con ID {id_entidad} no encontrada.")
         return None
     
     def listar(self):

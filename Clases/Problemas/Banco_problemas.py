@@ -38,8 +38,6 @@ class Banco_problemas(Gestor_entidades_base):
             problema.descripcion = nueva_descripcion
             problema.dificultad = nueva_dificultad
             self._guardar()
-        else:
-            print(f"Problema con ID {id_problema} no encontrado.")
                
     def obtener_problema_por_id(self, id_problema: int):
         """Obtiene un problema del banco de problemas por su ID"""
