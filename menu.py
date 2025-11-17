@@ -4,7 +4,7 @@ from Clases.Problemas.Problema import Problema, Facil, Medio, Dificil
 from Clases.Utilidades.Entradas import Entradas
 from Clases.Utilidades.validar import Validar
 from Clases.Participantes.participantes import Participantes
-
+from Clases.Utilidades.Gestor_entidades_base import Gestor_entidades_base
 def limpiar_pantalla():
     """Limpia la pantalla"""
     os.system("cls")
@@ -73,26 +73,24 @@ def mostrar_gestion_problemas(banco_problemas : Banco_problemas):
         match opcion:
             case '1':
                 limpiar_pantalla()
-                titulo, descripcion, dificultad = Entradas.pedir_problema()    
+                titulo, descripcion, dificultad = Entradas.pedir_datos_problema()    
                 banco_problemas.agregar_problema(titulo, descripcion, dificultad)
                 print("Problema agregado exitosamente.")
                 pausar_pantalla()
             case '2':
                 limpiar_pantalla()
                 id_problema = Entradas.pedir_id()
-                if Validar.validar_problema_exista(id_problema, banco_problemas):   
-                    print("Ingrese los nuevos datos del problema:")
-                    nuevo_titulo, nueva_descripcion, nueva_dificultad = Entradas.pedir_problema()
+                if banco_problemas.obtener_problema_por_id(id_problema):
+                    nuevo_titulo, nueva_descripcion, nueva_dificultad = Entradas.pedir_datos_problema()
                     banco_problemas.modificar_problema(id_problema, nuevo_titulo, nueva_descripcion, nueva_dificultad)
                     print("Problema modificado exitosamente.")
                 else:
-                    print("El problema no existe.")
-                
+                    print("El problema no existe.")                
                 pausar_pantalla()
             case '3':
                 limpiar_pantalla()
                 id_problema = Entradas.pedir_id()
-                if Validar.validar_problema_exista(id_problema, banco_problemas):
+                if Validar.id_problema_existe(id_problema, banco_problemas):
                     banco_problemas.eliminar_problema(id_problema)
                     print("Problema eliminado exitosamente.")
                 else:
@@ -168,7 +166,6 @@ def mostrar_gestion_participantes(participantes : Participantes):
                 print("Opcion invalida. Por favor, seleccione 1-5.")
                 pausar_pantalla()
                 limpiar_pantalla()
-
 
 if __name__ == "__main__":
     banco_problemas = Banco_problemas()

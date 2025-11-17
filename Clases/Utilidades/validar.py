@@ -29,10 +29,6 @@ class Validar:
         """Valida que el ID sea un número entero positivo"""
         return id_input.isdigit() and int(id_input) > 0
     
-    @staticmethod
-    def validar_problema_exista(id_problema: int, banco_problemas: Banco_problemas):
-        """Valida que el problema exista en el banco de problemas"""
-        return banco_problemas.obtener_problema_por_id(id_problema) is not None
     
     @staticmethod
     def validar_nombre(nombre: str):
@@ -59,6 +55,13 @@ class Validar:
     def id_existe(id: int, participantes : Participantes):
         for participante in participantes.lista_participantes:
             if participante.id == id:
+                return True
+        return False
+
+    @staticmethod
+    def id_problema_existe(id: int, banco_problemas : Banco_problemas):
+        for problema in banco_problemas.banco_problemas:
+            if problema.id_problema == id:
                 return True
         return False
             

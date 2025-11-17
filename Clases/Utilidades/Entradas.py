@@ -11,26 +11,43 @@ except ModuleNotFoundError:
     
 class Entradas:
     
-    def pedir_problema():
+    @staticmethod
+    def pedir_datos_problema():
+        titulo = Entradas.pedir_titulo_problema()
+        descripcion = Entradas.pedir_descripcion_problema()
+        dificultad = Entradas.pedir_dificultad_problema()
+        return titulo, descripcion, dificultad
+    
+    @staticmethod
+    def pedir_titulo_problema():
         titulo = input("Ingrese el título del problema: ")
         
         while not Validar.validar_titulo(titulo):
             print("Título inválido. Intente nuevamente.")
             titulo = input("Ingrese el título del problema: ")
-        
+        return titulo
+
+    @staticmethod
+    def pedir_descripcion_problema():
         descripcion = input("Ingrese la descripción: ")
         while not Validar.validar_descripcion(descripcion):
             print("Descripción inválida. Intente nuevamente.")
             descripcion = input("Ingrese la descripción: ")
-
+        return descripcion
+    
+    @staticmethod
+    def pedir_dificultad_problema():
         dificultad = input("Ingrese la dificultad (facil/medio/dificil): ")
         while not Validar.validar_dificultad(dificultad):
             print("Dificultad inválida. Intente nuevamente.")
             dificultad = input("Ingrese la dificultad (facil/medio/dificil): ")
+        return dificultad
 
-        return titulo, descripcion, dificultad
-    
-        
+    @staticmethod
+    def pedir_cambio_datos_problema():
+        pass
+            
+    @staticmethod
     def pedir_id():
         """Pide al usuario un ID de problema"""
         id_input = input("Ingrese el ID del problema: ")
@@ -86,39 +103,42 @@ class Entradas:
 
     @staticmethod
     def pedir_nombre_opcional():
-        nombre = input("Ingrese el nombre del participante: ")
-        if nombre != "":
-            while not Validar.validar_nombre(nombre):
-                print("Nombre inválido. Intente nuevamente.")
-                nombre = input("Ingrese el nombre del participante: ")
-        else:
-            nombre = None
-        return nombre
+        while True:
+            nombre = input("Ingrese el nombre del participante: ")
+            
+            if nombre == "":
+                return None
+            
+            if Validar.validar_nombre(nombre):
+                return nombre
+            
+            print("Nombre inválido. Intente nuevamente.")
 
     @staticmethod
     def pedir_edad_opcional():
-        edad = input("Ingrese la edad del participante: ")
-        if edad != "":
-            while not Validar.validar_edad(edad):
-                print("Edad inválida. Intente nuevamente.")
-                edad = input("Ingrese la edad del participante: ")
-            edad = int(edad)
-        else:
-            edad = None
-        return edad
+        while True:
+            edad = input("Ingrese la edad del participante: ")
+            
+            if edad == "":
+                return None
+            
+            if Validar.validar_edad(edad):
+                return int(edad)
+            
+            print("Edad inválida. Intente nuevamente.")
 
     @staticmethod
     def pedir_email_opcional(participantes):
         while True:
-                email = input("Ingrese el email del participante: ")
-                
-                if email == "":
-                    return None  
-                
-                if Validar.validar_email(email, participantes):
-                    return email  
-                
-                print("Email inválido. Intente nuevamente.")
+            email = input("Ingrese el email del participante: ")
+            
+            if email == "":
+                return None  
+            
+            if Validar.validar_email(email, participantes):
+                return email  
+            
+            print("Email inválido. Intente nuevamente.")
     
     def pedir_correo_participante(participantes: Participantes):
         email = input("Ingrese el email del participante: ")

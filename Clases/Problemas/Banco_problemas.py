@@ -1,17 +1,20 @@
-try: #arreglar este 
+try:
+    from ..Utilidades.Gestor_entidades_base import Gestor_entidades_base
     from ..Utilidades.Guardar import Guardar
     from ..Utilidades.cargar import Cargar
-    from .Problema import Problema, Facil, Medio, Dificil 
+    from .Problema import Problema, Facil, Medio, Dificil
 except ImportError:
+    from Clases.Utilidades.Gestor_entidades_base import Gestor_entidades_base
     from Clases.Utilidades.Guardar import Guardar
     from Clases.Utilidades.cargar import Cargar
     from Clases.Problemas.Problema import Problema, Facil, Medio, Dificil
 
 
-class Banco_problemas():
-    """clase que representa el Banco de problemas totales"""
+class Banco_problemas(Gestor_entidades_base):
+    """clase que representa el Banco de problemas totales heredando la clase base """ 
     def __init__(self):
-        self.problemas = Cargar.cargar_banco_problemas()    
+        super().__init__()
+        self.banco_problemas = Cargar.cargar_banco_problemas()
     
     def agregar_problema(self, titulo: str, descripcion: str, dificultad: str):
         """Agrega problema creándolo según dificultad"""
@@ -20,48 +23,51 @@ class Banco_problemas():
         elif dificultad == "medio":
             problema = Medio(titulo, descripcion)
         elif dificultad == "dificil":
-            problema = Dificil(titulo, descripcion)
-            
-        self.problemas.append(problema)
-        Guardar.guardar_banco_problemas(self.problemas)
+            problema = Dificil(titulo, descripcion)        
+        self.agregar(problema)
 
     def eliminar_problema(self, id_problema: int):
         """Elimina un problema del banco de problemas"""
-        problema = self.obtener_problema_por_id(id_problema)
-        if problema:
-            self.problemas.remove(problema)
-            Guardar.guardar_banco_problemas(self.problemas)
-        else:
-            raise ValueError("Índice de problema inválido.")
-
-    def modificar_problema(self, id_problema : int, nuevo_titulo: str, nueva_descripcion: str, nueva_dificultad: str):  
+        self.eliminar(id_problema)
+    
+    def modificar_problema(self, id_problema, nuevo_titulo, nueva_descripcion, nueva_dificultad):  
         """Modifica un problema en el banco de problemas"""
-        problema = self.obtener_problema_por_id(id_problema)
+        problema = self.obtener_por_id(id_problema)
         if problema:
             problema.titulo = nuevo_titulo
             problema.descripcion = nueva_descripcion
             problema.dificultad = nueva_dificultad
-            Guardar.guardar_banco_problemas(self.problemas)
+            self._guardar()
         else:
-            raise ValueError("Índice de problema inválido.")
-        
+            print(f"Problema con ID {id_problema} no encontrado.")
+               
     def obtener_problema_por_id(self, id_problema: int):
         """Obtiene un problema del banco de problemas por su ID"""
-        for problema in self.problemas:
-            if problema.id_problema == id_problema:
-                return problema
-        return None
+        return self.obtener_por_id(id_problema)
 
     def listar_problema(self):
         """Lista todos los problemas en el banco de problemas"""
-        if not self.problemas:
-            print("No hay problemas en el banco de problemas.")
-            return None
+        self.listar()
+
+    def _guardar(self):
+        Guardar.guardar_banco_problemas(self.banco_problemas)
+    
+    def _obtener_lista(self):
+        """Cada clase hija devuelve su lista específica"""
+        return self.banco_problemas
         
-        for problema in self.problemas:
-            if isinstance(problema, Facil):
-                print(f"ID: {problema.id_problema} | Tipo: Fácil | Título: {problema.titulo} | Descripción: {problema.descripcion} | Puntos: {problema.puntos}")
-            elif isinstance(problema, Medio):
-                print(f"ID: {problema.id_problema} | Tipo: Medio | Título: {problema.titulo} | Descripción: {problema.descripcion} | Puntos: {problema.puntos}")
-            elif isinstance(problema, Dificil):
-                print(f"ID: {problema.id_problema} | Tipo: Difícil | Título: {problema.titulo} | Descripción: {problema.descripcion} | Puntos: {problema.puntos}")
+    def _obtener_id_entidad(self,problema):
+        return problema.id_problema
+
+    def _mostrar_entidad(self, problema):
+        """Muestra un problema de manera específica según su dificultad"""
+        if isinstance(problema, Facil):
+            tipo = "facil"
+        elif isinstance(problema, Medio):
+            tipo = "medio"
+        elif isinstance(problema, Dificil):
+            tipo = "dificil"
+
+        print(f"ID: {problema.id_problema} | Tipo: {tipo} | Título: {problema.titulo} | Descripción: {problema.descripcion} | Puntos: {problema.puntos}")
+                
+            
