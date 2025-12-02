@@ -42,12 +42,31 @@ class Cargar:
             return []
         
     @staticmethod
-    def cargar_id_equipo_counter():
+    def cargar_id_equipo_contador():
         """Carga el contador de IDs de equipos desde un archivo."""
-        ruta = ""
+        ruta = "datos/id_equipo_contador"
         try:  
             with open(ruta, 'rb') as f:
                 return pickle.load(f)
         except FileNotFoundError:
             return 1  # Valor por defecto si no se encuentra el archivo
 
+    @staticmethod
+    def cargar_equipos():
+        """carga la lista de participantes"""
+        ruta = "datos/equipos.pkl"
+        try:
+            with open(ruta, "rb") as f:
+                return pickle.load(f)
+        except FileNotFoundError:
+            return []
+    
+    @staticmethod
+    def cargar_id_maraton_contador():
+        """Carga el contador de IDs de maratones desde un archivo."""
+        ruta = "datos/maraton/id_maraton_contador.pkl"
+        try:
+            with open(ruta, 'rb') as f:
+                return pickle.load(f)
+        except FileNotFoundError:
+            return 1  # Valor por defecto si no se encuentra el archivo

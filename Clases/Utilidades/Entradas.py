@@ -155,4 +155,28 @@ class Entradas:
         else:
             return None
             
+    @staticmethod
+    def pedir_nombre_equipo():
+        nombre = input("Ingrese el nombre del equipo: ")
+        while not Validar.validar_nombre(nombre):
+                print("Nombre inválido. Intente nuevamente.")
+                nombre = input("Ingrese el nombre del equipo: ")
+        return nombre
     
+    @staticmethod
+    def pedir_datos_maraton():
+        nombre = input("Ingrese el nombre de la maratón: ")
+        while not Validar.validar_nombre(nombre):
+                print("Nombre inválido. Intente nuevamente.")
+                nombre = input("Ingrese el nombre de la maratón: ")
+        dificultad = input("Ingrese la dificultad de la maratón (facil/medio/dificil): ")
+        while not Validar.validar_dificultad(dificultad):
+            print("Dificultad inválida. Intente nuevamente.")
+            dificultad = input("Ingrese la dificultad de la maratón (facil/medio/dificil): ")
+        
+        descripcion = input("Ingrese la descripción de la maratón (opc): ")
+        
+        if descripcion == "":
+            descripcion = "Sin descripción"
+            
+        return nombre, dificultad, descripcion

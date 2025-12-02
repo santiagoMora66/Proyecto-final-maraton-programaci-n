@@ -12,4 +12,8 @@ class Participante:
         Guardar.guardar_id_participante_contador(Participante.id_participantes_contador)
         self.nombre = nombre
         self.edad = edad
-        self.email = email #este email funciona a manera de id por lo que debe ser unico
+        self.email = email
+        self.disponible = True
+
+    def __str__(self):
+        return self.nombre

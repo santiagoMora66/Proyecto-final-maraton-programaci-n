@@ -32,11 +32,23 @@ class Guardar:
         
     
     @staticmethod
-    def guardar_id_equipo_counter(counter):
-        ruta = "datos/id_equipo_counter"
+    def guardar_id_equipo_contador(contador):
+        ruta = "datos/id_equipo_contador"
         """Guarda el contador de IDs de equipos en un archivo."""
         with open(ruta, 'wb') as f:
-            pickle.dump(counter, f)
+            pickle.dump(contador, f)
 
+    @staticmethod
+    def Guardar_equipos(equipos):
+        """guarda la lista de participantes en un archivo pkl"""
+        ruta = "datos/equipos.pkl"
+        with open(ruta, "wb") as f:
+            pickle.dump(equipos, f)
     
+    @staticmethod
+    def guardar_id_maraton_contador(contador):
+        """Guarda el contador de IDs de maratones en un archivo."""
+        ruta = "datos/maraton/id_maraton_contador.pkl"
+        with open(ruta, 'wb') as f:
+            pickle.dump(contador, f)
     

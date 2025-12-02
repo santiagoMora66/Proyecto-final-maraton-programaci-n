@@ -25,11 +25,7 @@ class Participantes(Gestor_entidades_base):
              
     def listar_participantes(self):
         """metodo que muestra todos los participantes de la lista"""
-        if not self.lista_participantes:
-            print("No hay participantes registrados.")
-            return None
-        for p in self.lista_participantes:
-            print(f"ID:{p.id} Nombre: {p.nombre}, Edad: {p.edad}, Email: {p.email}")
+        self.listar()
 
     def editar_participante(self, id:str, nombre: str, edad: str, email:str):
         """metodo para modificar los datos de un participantes"""
@@ -43,7 +39,7 @@ class Participantes(Gestor_entidades_base):
                 Participante.email = email
             self._guardar()
 
-                            
+      
     def obtener_participante(self, id: int):
         """metodo par obtener y devolver un participante en especificio """
         for p in self.lista_participantes:
@@ -53,7 +49,7 @@ class Participantes(Gestor_entidades_base):
         return None
 
     def _guardar(self):
-        Guardar.guardar_banco_problemas(self.lista_participantes)
+        Guardar.Guardar_participantes(self.lista_participantes)
 
     def _obtener_lista(self):
         """Cada clase hija devuelve su lista específica"""
@@ -63,4 +59,9 @@ class Participantes(Gestor_entidades_base):
         return participante.id
 
     def _mostrar_entidad(self, participante: Participante):
-        print(f"ID: {participante.id} | Nombre: {participante.nombre} | Edad: {participante.edad} | Email: {participante.email}")
+        if participante.disponible:
+            disponible_str = "Sí"
+        else:
+            disponible_str = "No"
+        print(f"ID: {participante.id} | Nombre: {participante.nombre} | Edad: {participante.edad} | Email: {participante.email} | Disponible: {disponible_str}")
+
